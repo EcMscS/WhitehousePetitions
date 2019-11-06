@@ -8,23 +8,71 @@
 
 import UIKit
 
-class MainVC: UIViewController {
+class MainVC: UITabBarController {
 
+    let mainTableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupTableView()
+        setupViews()
+        setupNavBar()
+        setupTabBar()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupTableView() {
+        mainTableView.dataSource = self
+        mainTableView.delegate = self
+        mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+    
+        mainTableView.backgroundColor = .systemBackground
     }
-    */
 
+    func setupNavBar() {
+        title = "Petitions"
+        navigationController?.navigationBar.tintColor = .systemYellow
+    }
+    
+    func setupTabBar() {
+        let firstVC = UIViewController()
+        firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        
+        let secondVC = UIViewController()
+        secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
+        
+        let viewControllerList = [firstVC, secondVC]
+        viewControllers = viewControllerList.map {
+            UINavigationController(rootViewController: $0)
+        }
+        
+    }
+    
+    func setupViews() {
+        view.addSubview(mainTableView)
+        
+        mainTableView.translatesAutoresizingMaskIntoConstraints = false
+        mainTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
+        mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+        mainTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
+        //mainTableView.bottomAnchor.constraint(equalTo: , constant: 0).isActive = true
+        
+    }
+    
 }
+
+extension MainVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //TODO
+        return UITableViewCell()
+    }
+    
+    
+}
+
+//extension MainVC: UITabBarControllerDelegate {
+//
+//}
