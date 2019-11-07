@@ -42,8 +42,11 @@ class FirstTabVC: UITableViewController {
             if let data = try? Data(contentsOf: url) {
                 //It's ok to Parse JSON Data
                 parse(json: data)
+                return
             }
         }
+        
+        showError()
     }
     
     func parse(json: Data) {
@@ -53,6 +56,12 @@ class FirstTabVC: UITableViewController {
             petitions = jsonPetitions.results
             tableView.reloadData()
         }
+    }
+    
+    func showError() {
+        let ac = UIAlertController(title: "Loading Error", message: "Please check your network connection and try again", preferredStyle: .alert)
+        let alert = UIAlertAction(title: "OK", style: .default, handler: nil)
+        ac.addAction(alert)
     }
     
     // MARK: - Table view data source

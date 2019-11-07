@@ -11,7 +11,7 @@ import UIKit
 class SecondTabVC: UITableViewController {
 
     var petitions = [Petition]()
-    let whitehousePetitionURL = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
+    let whitehousePetitionURL = "https://api.whitehouse.gov/v1/petitions.json?signatureCountFloor=10000&limit=100"
     let workingURL:String = "https://www.hackingwithswift.com/samples/petitions-2.json"
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class SecondTabVC: UITableViewController {
     }
     
     func fetchData() {
-        let urlString = workingURL
+        let urlString = whitehousePetitionURL
         
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {

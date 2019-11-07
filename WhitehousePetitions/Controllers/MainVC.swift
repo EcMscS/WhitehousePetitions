@@ -17,7 +17,7 @@ class MainVC: UITabBarController {
     }
 
     func setupNavBar() {
-        title = "Petitions"
+        title = " General Petitions"
         navigationController?.navigationBar.tintColor = .systemYellow
     }
     
@@ -31,6 +31,14 @@ class MainVC: UITabBarController {
         let viewControllerList = [firstVC, secondVC]
         viewControllers = viewControllerList
         
+    }
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item.tag == 1 {
+            title = "Featured Petitions"
+        } else {
+            title = "General Petitions"
+        }
     }
     
 }
