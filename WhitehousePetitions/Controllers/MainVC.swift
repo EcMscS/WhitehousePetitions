@@ -9,23 +9,11 @@
 import UIKit
 
 class MainVC: UITabBarController {
-
-    let mainTableView = UITableView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        setupViews()
         setupNavBar()
         setupTabBar()
-    }
-    
-    func setupTableView() {
-        mainTableView.dataSource = self
-        mainTableView.delegate = self
-        mainTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
-    
-        mainTableView.backgroundColor = .systemBackground
     }
 
     func setupNavBar() {
@@ -34,10 +22,10 @@ class MainVC: UITabBarController {
     }
     
     func setupTabBar() {
-        let firstVC = UIViewController()
+        let firstVC = FirstTabVC()
         firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
         
-        let secondVC = UIViewController()
+        let secondVC = SecondTabVC()
         secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
         
         let viewControllerList = [firstVC, secondVC]
@@ -47,32 +35,4 @@ class MainVC: UITabBarController {
         
     }
     
-    func setupViews() {
-        view.addSubview(mainTableView)
-        
-        mainTableView.translatesAutoresizingMaskIntoConstraints = false
-        mainTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0).isActive = true
-        mainTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
-        mainTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0).isActive = true
-        //mainTableView.bottomAnchor.constraint(equalTo: , constant: 0).isActive = true
-        
-    }
-    
 }
-
-extension MainVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //TODO
-        return UITableViewCell()
-    }
-    
-    
-}
-
-//extension MainVC: UITabBarControllerDelegate {
-//
-//}

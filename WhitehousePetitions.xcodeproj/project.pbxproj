@@ -12,6 +12,11 @@
 		594437C523710D1B0098FC32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 594437C423710D1B0098FC32 /* Assets.xcassets */; };
 		594437C823710D1B0098FC32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 594437C623710D1B0098FC32 /* LaunchScreen.storyboard */; };
 		594437D523710DFB0098FC32 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437D423710DFB0098FC32 /* MainVC.swift */; };
+		594437DB237354CA0098FC32 /* FirstTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437DA237354CA0098FC32 /* FirstTabVC.swift */; };
+		594437DD237354D70098FC32 /* SecondTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437DC237354D70098FC32 /* SecondTabVC.swift */; };
+		594437DF2373602F0098FC32 /* SubtitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437DE2373602F0098FC32 /* SubtitleTableViewCell.swift */; };
+		594437E1237387D40098FC32 /* Petition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437E0237387D40098FC32 /* Petition.swift */; };
+		594437E3237388410098FC32 /* Petitions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437E2237388410098FC32 /* Petitions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		594437C723710D1B0098FC32 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		594437C923710D1B0098FC32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		594437D423710DFB0098FC32 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		594437DA237354CA0098FC32 /* FirstTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTabVC.swift; sourceTree = "<group>"; };
+		594437DC237354D70098FC32 /* SecondTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondTabVC.swift; sourceTree = "<group>"; };
+		594437DE2373602F0098FC32 /* SubtitleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleTableViewCell.swift; sourceTree = "<group>"; };
+		594437E0237387D40098FC32 /* Petition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Petition.swift; sourceTree = "<group>"; };
+		594437E2237388410098FC32 /* Petitions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Petitions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				594437D423710DFB0098FC32 /* MainVC.swift */,
+				594437DA237354CA0098FC32 /* FirstTabVC.swift */,
+				594437DC237354D70098FC32 /* SecondTabVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -93,6 +105,7 @@
 		594437D223710D460098FC32 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				594437DE2373602F0098FC32 /* SubtitleTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -100,6 +113,8 @@
 		594437D323710D4C0098FC32 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				594437E0237387D40098FC32 /* Petition.swift */,
+				594437E2237388410098FC32 /* Petitions.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,9 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				594437E1237387D40098FC32 /* Petition.swift in Sources */,
+				594437E3237388410098FC32 /* Petitions.swift in Sources */,
 				594437BC23710D190098FC32 /* AppDelegate.swift in Sources */,
 				594437D523710DFB0098FC32 /* MainVC.swift in Sources */,
+				594437DD237354D70098FC32 /* SecondTabVC.swift in Sources */,
+				594437DF2373602F0098FC32 /* SubtitleTableViewCell.swift in Sources */,
 				594437BE23710D190098FC32 /* SceneDelegate.swift in Sources */,
+				594437DB237354CA0098FC32 /* FirstTabVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
