@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		592081EF2373EF68009C7A02 /* DetailViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592081EE2373EF68009C7A02 /* DetailViewVC.swift */; };
 		594437BC23710D190098FC32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437BB23710D190098FC32 /* AppDelegate.swift */; };
 		594437BE23710D190098FC32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594437BD23710D190098FC32 /* SceneDelegate.swift */; };
 		594437C523710D1B0098FC32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 594437C423710D1B0098FC32 /* Assets.xcassets */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		592081EE2373EF68009C7A02 /* DetailViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewVC.swift; sourceTree = "<group>"; };
 		594437B823710D190098FC32 /* Codable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Codable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		594437BB23710D190098FC32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		594437BD23710D190098FC32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				594437D423710DFB0098FC32 /* MainVC.swift */,
 				594437DA237354CA0098FC32 /* FirstTabVC.swift */,
 				594437DC237354D70098FC32 /* SecondTabVC.swift */,
+				592081EE2373EF68009C7A02 /* DetailViewVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				594437E3237388410098FC32 /* Petitions.swift in Sources */,
 				594437BC23710D190098FC32 /* AppDelegate.swift in Sources */,
 				594437D523710DFB0098FC32 /* MainVC.swift in Sources */,
+				592081EF2373EF68009C7A02 /* DetailViewVC.swift in Sources */,
 				594437DD237354D70098FC32 /* SecondTabVC.swift in Sources */,
 				594437DF2373602F0098FC32 /* SubtitleTableViewCell.swift in Sources */,
 				594437BE23710D190098FC32 /* SceneDelegate.swift in Sources */,

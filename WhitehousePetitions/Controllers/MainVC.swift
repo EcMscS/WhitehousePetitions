@@ -23,15 +23,13 @@ class MainVC: UITabBarController {
     
     func setupTabBar() {
         let firstVC = FirstTabVC()
-        firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 0)
+        firstVC.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 0)
         
         let secondVC = SecondTabVC()
-        secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .recents, tag: 1)
+        secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .featured, tag: 1)
         
         let viewControllerList = [firstVC, secondVC]
-        viewControllers = viewControllerList.map {
-            UINavigationController(rootViewController: $0)
-        }
+        viewControllers = viewControllerList
         
     }
     
