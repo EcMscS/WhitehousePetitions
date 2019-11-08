@@ -8,24 +8,36 @@
 
 import UIKit
 
+let searchTabOneNotificationKey = "com.talismanmobile.searchTabOne"
+
 class FirstTabVC: UITableViewController {
 
+    var keywords:String = ""
     var petitions = [Petition]()
+    var searchedPetitions = [Petition]()
+    var displayAll = true
+    
+    let searchKey = Notification.Name(rawValue: searchTabOneNotificationKey)
+    
     let whitehousePetitionURL = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
     let workingURL:String = "https://www.hackingwithswift.com/samples/petitions-1.json"
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupObservers()
         setupView()
         setupTableView()
         fetchData()
     }
 
+    func setupObservers() {
+        NotificationCenter.default.addObserver(forName: searchKey, object: nil, queue: nil, using: catchNotification(notification:))
+    }
     
     func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Past Petitions"
+
     }
     
     func setupTableView() {
@@ -36,6 +48,7 @@ class FirstTabVC: UITableViewController {
     }
     
     func fetchData() {
+        displayAll = true
         let urlString = workingURL
         
         if let url = URL(string: urlString) {
@@ -64,6 +77,38 @@ class FirstTabVC: UITableViewController {
         ac.addAction(alert)
     }
     
+    @objc func catchNotification(notification: Notification) {
+        guard let searchWords = notification.userInfo!["Search"] as? String else { return }
+        
+        if searchWords.isEmpty {
+            displayAll = true
+        } else {
+            searchedPetitions.removeAll()
+            displayAll = false
+            var resultsCount = 0
+            for each in petitions {
+                if each.title.lowercased().contains(searchWords.lowercased()) {
+                    searchedPetitions.insert(each, at: 0)
+                    resultsCount += 1
+                }
+            }
+            showResultCount(count: resultsCount, words: searchWords)
+        }
+    
+        tableView.reloadData()
+    }
+    
+    func showResultCount(count: Int, words: String) {
+        let resultAC = UIAlertController(title: "Searched for '\(words)' in Petition Title", message: "Found \(count) Petitions", preferredStyle:.alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        resultAC.addAction(action)
+        present(resultAC, animated: true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -71,14 +116,23 @@ class FirstTabVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        if displayAll == true {
+            return petitions.count
+        } else {
+            return searchedPetitions.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let petition = petitions[indexPath.row]
+        var petition = Petition(title: "", body: "", signatureCount: 0)
+        if displayAll == true {
+            petition = petitions[indexPath.row]
+        } else {
+            petition = searchedPetitions[indexPath.row]
+        }
         
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
@@ -91,8 +145,5 @@ class FirstTabVC: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    deinit {
-        petitions = [Petition]()
-    }
 
 }

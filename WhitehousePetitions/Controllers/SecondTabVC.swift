@@ -8,24 +8,34 @@
 
 import UIKit
 
+let searchTabTwoNotificationKey = "com.talismanombile.searchTabTwo"
+
 class SecondTabVC: UITableViewController {
 
     var petitions = [Petition]()
+    var searchedPetitions = [Petition]()
     let whitehousePetitionURL = "https://api.whitehouse.gov/v1/petitions.json?signatureCountFloor=10000&limit=100"
     let workingURL:String = "https://www.hackingwithswift.com/samples/petitions-2.json"
+    var displayAll = true
+    
+    let searchKey = Notification.Name(rawValue: searchTabTwoNotificationKey)
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupObservers()
         setupView()
         setupTableView()
         fetchData()
     }
 
+    func setupObservers() {
+        NotificationCenter.default.addObserver(forName: searchKey, object: nil, queue: nil, using: catchNotification(notification:))
+    }
     
     func setupView() {
         view.backgroundColor = .systemBackground
-        title = "Featured Petitions"
+
     }
     
     func setupTableView() {
@@ -44,6 +54,8 @@ class SecondTabVC: UITableViewController {
                 parse(json: data)
             }
         }
+        
+        showError()
     }
     
     func parse(json: Data) {
@@ -55,6 +67,45 @@ class SecondTabVC: UITableViewController {
         }
     }
     
+    func showError() {
+        let ac = UIAlertController(title: "Loading Error", message: "Please check your network connection and try again", preferredStyle: .alert)
+        let alert = UIAlertAction(title: "OK", style: .default, handler: nil)
+        ac.addAction(alert)
+    }
+    
+    @objc func catchNotification(notification: Notification) {
+        guard let searchWords = notification.userInfo!["Search"] as? String else { return }
+        
+        if searchWords.isEmpty {
+            displayAll = true
+        } else {
+            searchedPetitions.removeAll()
+            displayAll = false
+            var resultsCount = 0
+            for each in petitions {
+                if each.title.lowercased().contains(searchWords.lowercased()) {
+                    searchedPetitions.insert(each, at: 0)
+                    resultsCount += 1
+                }
+            }
+            showResultCount(count: resultsCount, words: searchWords)
+        }
+    
+        tableView.reloadData()
+    }
+    
+    func showResultCount(count: Int, words: String) {
+        let resultAC = UIAlertController(title: "Searched for '\(words)' in Petition Title", message: "Found \(count) Petitions", preferredStyle:.alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        resultAC.addAction(action)
+        present(resultAC, animated: true)
+    }
+
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -62,14 +113,23 @@ class SecondTabVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return petitions.count
+        if displayAll == true {
+            return petitions.count
+        } else {
+            return searchedPetitions.count
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let petition = petitions[indexPath.row]
+        var petition = Petition(title: "", body: "", signatureCount: 0)
+        if displayAll == true {
+            petition = petitions[indexPath.row]
+        } else {
+            petition = searchedPetitions[indexPath.row]
+        }
         
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
@@ -82,8 +142,5 @@ class SecondTabVC: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    deinit {
-        petitions = [Petition]()
-    }
 
 }
