@@ -138,7 +138,13 @@ class SecondTabVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = DetailViewVC()
-        vc.detailItem = petitions[indexPath.row]
+        
+        if displayAll == true {
+            vc.detailItem = petitions[indexPath.row]
+        } else {
+            vc.detailItem = searchedPetitions[indexPath.row]
+        }
+        
         navigationController?.pushViewController(vc, animated: true)
     }
     
